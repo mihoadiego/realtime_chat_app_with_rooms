@@ -2,20 +2,23 @@ import styles from './styles.module.css';
 import SelectRoomComponent from './utils';
 import { useNavigate } from 'react-router-dom';
 
-// function to handle Socket ROOM Connexion when clicking 'JOIN ROOM'
+
 
 
 
 const Home = ({username, setUsername, room, setRoom, socket}) =>  {
+  
   const navigate = useNavigate();
 
+  // handle Socket Connexion when clicking 'JOIN ROOM'
   const joinRoom = () => {
     if (room !== '' && username !== '') {
       socket.emit('join_room', { username, room });
-      console.log(` ${username} joining_room ${room}`)
-      navigate('/chat')
     }
+    // Redirect
+    navigate('/chat', { replace: true }); // Add this
   };
+  
   return (
     <div className={styles.container}>
 
